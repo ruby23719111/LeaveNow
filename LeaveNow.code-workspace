@@ -1,0 +1,16 @@
+{
+  "folders": [{ "name": "LeaveNow", "path": "." }],
+  "settings": {
+    "window.title": "LeaveNow",
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "files.exclude": { "**/node_modules": true, "**/.expo": true },
+  },
+  "extensions": {
+    "recommendations": [
+      "expo.vscode-expo-tools",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+    ],
+  },
+}

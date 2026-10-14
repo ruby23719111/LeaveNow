@@ -1,0 +1,125 @@
+{
+  "voice": "Ballad",
+  "provider": "OpenAI",
+  "model": "gpt-4o-mini-tts",
+  "generated": true,
+  "accentInstruction": "Australian English",
+  "direction": "Youthful, bright and friendly; softer supportive delivery for missed-trip feedback.",
+  "generatedAt": "2026-10-13",
+  "clips": [
+    {
+      "id": "hello",
+      "text": "Hey, travel buddy! Where are we off to?",
+      "durationSeconds": 3.3,
+      "bytes": 26608
+    },
+    {
+      "id": "armed",
+      "text": "You're all set. I'll let you know when to get ready and when to head out.",
+      "durationSeconds": 5.8,
+      "bytes": 50605
+    },
+    {
+      "id": "prepare",
+      "text": "Time to get ready. Let's make this bus.",
+      "durationSeconds": 3.5,
+      "bytes": 29667
+    },
+    {
+      "id": "prepare_any",
+      "text": "Time to get ready. Let's make this trip.",
+      "durationSeconds": 3.6,
+      "bytes": 32480
+    },
+    {
+      "id": "leave",
+      "text": "Time to head out. You've got this.",
+      "durationSeconds": 3.2,
+      "bytes": 27800
+    },
+    {
+      "id": "caught",
+      "text": "Good on ya — you made it!",
+      "durationSeconds": 2.5,
+      "bytes": 21009
+    },
+    {
+      "id": "missed",
+      "text": "Ah, that's frustrating. What happened?",
+      "durationSeconds": 4.1,
+      "bytes": 34252
+    },
+    {
+      "id": "caring",
+      "text": "No worries. One missed trip doesn't undo your progress.",
+      "durationSeconds": 6.5,
+      "bytes": 55186
+    },
+    {
+      "id": "bus_early",
+      "text": "An early service can catch anyone out. That wasn't your preparation time.",
+      "durationSeconds": 5.8,
+      "bytes": 50761
+    },
+    {
+      "id": "cancelled",
+      "text": "That's a rough one. A cancelled service isn't on you.",
+      "durationSeconds": 4.6,
+      "bytes": 38780
+    },
+    {
+      "id": "data_wrong",
+      "text": "That information let you down. Let's keep that separate from your preparation time.",
+      "durationSeconds": 6.1,
+      "bytes": 52457
+    },
+    {
+      "id": "prep_long",
+      "text": "Thanks for letting me know. Your recorded preparation times can help us plan next time.",
+      "durationSeconds": 6.2,
+      "bytes": 53270
+    },
+    {
+      "id": "started_late",
+      "text": "Getting started can be the tricky bit. We can try an earlier reminder next time.",
+      "durationSeconds": 6.7,
+      "bytes": 59159
+    },
+    {
+      "id": "walk_long",
+      "text": "Sounds like the walk needed more time. That isn't time spent getting ready.",
+      "durationSeconds": 5.7,
+      "bytes": 49192
+    },
+    {
+      "id": "learning",
+      "text": "I've got a suggestion from your recorded preparation times. You decide what works for you.",
+      "durationSeconds": 7.3,
+      "bytes": 61834
+    },
+    {
+      "id": "updated",
+      "text": "All sorted. We'll use that preparation time for your next trip.",
+      "durationSeconds": 5,
+      "bytes": 42816
+    },
+    {
+      "id": "kept",
+      "text": "No worries. You're in charge. We'll keep your current preparation time.",
+      "durationSeconds": 5.3,
+      "bytes": 45937
+    },
+    {
+      "id": "check",
+      "text": "Let's check your trip before heading out. Read the latest update on screen.",
+      "durationSeconds": 5.9,
+      "bytes": 52154
+    },
+    {
+      "id": "preview",
+      "text": "G'day! I'll let you know when to get ready and when to head out.",
+      "durationSeconds": 4.1,
+      "bytes": 35775
+    }
+  ]
+}

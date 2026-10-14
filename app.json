@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "LeaveNow",
+    "slug": "leavenow-expo",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "scheme": "leavenow-expo",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.kriscchsu.leavenow.expo",
+      "infoPlist": {
+        "NSLocalNetworkUsageDescription": "Connect to your Mac while previewing LeaveNow in Expo Go."
+      }
+    },
+    "android": {
+      "package": "com.kriscchsu.leavenow.expo"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "Record your own LeaveNow reminders when you tap Record."
+        }
+      ],
+      "@react-native-community/datetimepicker",
+      "expo-font",
+      "expo-asset",
+      "expo-status-bar"
+    ],
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
