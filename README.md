@@ -37,16 +37,16 @@ Add dependencies with `npx expo install <package>` so versions match the SDK. Fu
 
 ## Development commands
 
-| Command                      | What it does                                                                                                   |
-| ---------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `npm run dev`                | Starts Expo Go and the local transport API together; detects the Mac's LAN IP and skips a busy API port        |
-| `npm run dev -- --port 8083` | Runs Expo on a different port                                                                                  |
-| `npm run dev -- --web`       | Also opens the React Native Web preview                                                                        |
-| `npm start`                  | Starts Expo only; you need to start the API separately and set its URL                                         |
-| `npm run api`                | Starts only the development transport API (port 4174)                                                          |
-| `npm run check`              | ESLint, TypeScript project check and core behaviour tests                                                      |
-| `npx expo-doctor`            | Checks Expo dependency and config compatibility                                                                |
-| `npm run export`             | Exports iOS / Android Hermes JS bundles and the Web bundle; this is not a signed installable build             |
+| Command                      | What it does                                                                                            |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `npm run dev`                | Starts Expo Go and the local transport API together; detects the Mac's LAN IP and skips a busy API port |
+| `npm run dev -- --port 8083` | Runs Expo on a different port                                                                           |
+| `npm run dev -- --web`       | Also opens the React Native Web preview                                                                 |
+| `npm start`                  | Starts Expo only; you need to start the API separately and set its URL                                  |
+| `npm run api`                | Starts only the development transport API (port 4174)                                                   |
+| `npm run check`              | ESLint, TypeScript project check and core behaviour tests                                               |
+| `npx expo-doctor`            | Checks Expo dependency and config compatibility                                                         |
+| `npm run export`             | Exports iOS / Android Hermes JS bundles and the Web bundle; this is not a signed installable build      |
 
 JS/JSX is the main language for now. `tsconfig.json` is there as a base for adding TypeScript later; full `checkJs` checking is not yet enabled for the existing JS.
 
