@@ -1,126 +1,132 @@
 # LeaveNow — React Native / Expo Go
 
-可在 **VS Code** 持續開發的獨立 React Native 專案。介面使用 JavaScript / JSX、Expo Router；這是原生 View、Text、Pressable 等元件，不是 WebView 包裝網站。
+English | [繁體中文](README.zh-TW.md)
 
-## 最快開始（Mac + iPhone）
+LeaveNow is a departure assistant for Brisbane, Queensland. It plans when to start getting ready and when to leave the house, based on real Translink journeys and how long you actually take to get ready.
 
-1. 在 VS Code 選 **File → Open Folder**，開啟本資料夾 `LeaveNow-Expo`，或開啟 `LeaveNow.code-workspace`。
-2. iPhone 安裝 **Expo Go**，並讓 iPhone 和 Mac 連上相同 Wi-Fi。
-3. VS Code Terminal 執行：
+This is a standalone React Native project you can keep developing in **VS Code**. The UI is written in JavaScript / JSX with Expo Router, using native `View`, `Text`, `Pressable` and similar components. It is not a website wrapped in a WebView.
+
+> Independent student project. Not an official Translink service.
+
+## Quick start (Mac + iPhone)
+
+1. In VS Code, choose **File → Open Folder** and open this folder, or open `LeaveNow.code-workspace`.
+2. Install **Expo Go** on your iPhone, and connect the iPhone and the Mac to the same Wi-Fi network.
+3. In the VS Code terminal, run:
 
    ```sh
    npm install
    npm run dev
    ```
 
-4. 用 **iPhone 相機**掃終端機 QR code，選擇用 Expo Go 開啟；若系統詢問區域網路存取，允許連到這台 Mac。
-5. 儲存程式碼後會 Fast Refresh。完成後在終端機按 `Ctrl+C`，同時停止 Expo 和本機交通 API。
+4. Scan the QR code in the terminal with the **iPhone Camera** and open it in Expo Go. If iOS asks for local network access, allow it to connect to your Mac.
+5. Saving code triggers Fast Refresh. When you are done, press `Ctrl+C` in the terminal to stop both Expo and the local transport API.
 
-已安裝過依賴時只需要 `npm run dev`。不需要 OpenAI API key，也不會為播放已生成的聲音再次扣 API 點數。
+Once dependencies are installed, you only need `npm run dev`. No OpenAI API key is needed, and playing the pre-generated voice clips does not use any API credits.
 
-需要 Node.js 22.13+；目前在 Node 24 測試。套件版本由 `package-lock.json` 鎖定，換電腦可用 `npm ci`。
+Requires Node.js 22.13 or later; currently tested on Node 24. Package versions are locked in `package-lock.json`, so on a new machine you can use `npm ci`.
 
-## Expo Go 版本
+## Expo Go version
 
-本專案使用 **Expo SDK 57 / React Native 0.86.3 / React 19.2.3**，依你的 iPhone Expo Go 顯示的 SDK 57 版本配對。不要混用舊 SDK 54 的開發服務或 bundle；升級後可用 `npm run dev -- --clear --port 8083` 清除快取再掃新 QR code。
+This project uses **Expo SDK 57 / React Native 0.86.3 / React 19.2.3**, matched to the SDK 57 version shown in Expo Go on the iPhone. Do not mix in dev servers or bundles from the old SDK 54. After an upgrade, run `npm run dev -- --clear --port 8083` to clear the cache, then scan the new QR code.
 
-- [SDK 57 官方參考](https://docs.expo.dev/versions/v57.0.0/)
-- [SDK 57 升級說明](https://expo.dev/changelog/sdk-57)
+- [SDK 57 reference](https://docs.expo.dev/versions/v57.0.0/)
+- [SDK 57 changelog](https://expo.dev/changelog/sdk-57)
 
-新增依賴使用 `npx expo install <package>`，讓版本符合 SDK。未來升級應整組升級 Expo SDK 與相依套件。
+Add dependencies with `npx expo install <package>` so versions match the SDK. Future upgrades should move the Expo SDK and its dependencies together.
 
-## 開發方式
+## Development commands
 
-| 指令                         | 用途                                                               |
-| ---------------------------- | ------------------------------------------------------------------ |
-| `npm run dev`                | 一次啟動 Expo Go 及本機交通 API；自動偵測 Mac 的 LAN IP，避開已佔用的 API 連接埠            |
-| `npm run dev -- --port 8083` | Expo 使用其他連接埠                                                |
-| `npm run dev -- --web`       | 同時開啟 React Native Web 預覽                                     |
-| `npm start`                  | 只啟動 Expo；需要另行啟動 API 並設定其網址                         |
-| `npm run api`                | 只啟動開發用交通 API（4174）                                       |
-| `npm run check`              | ESLint、TypeScript 專案檢查、核心行為測試                      |
-| `npx expo-doctor`            | Expo 依賴與設定相容性檢查                                          |
-| `npm run export`             | 匯出 iOS / Android Hermes JS bundles 與 Web bundle；不是簽署安裝檔 |
+| Command                      | What it does                                                                                            |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `npm run dev`                | Starts Expo Go and the local transport API together; detects the Mac's LAN IP and skips a busy API port |
+| `npm run dev -- --port 8083` | Runs Expo on a different port                                                                           |
+| `npm run dev -- --web`       | Also opens the React Native Web preview                                                                 |
+| `npm start`                  | Starts Expo only; you need to start the API separately and set its URL                                  |
+| `npm run api`                | Starts only the development transport API (port 4174)                                                   |
+| `npm run check`              | ESLint, TypeScript project check and core behaviour tests                                               |
+| `npx expo-doctor`            | Checks Expo dependency and config compatibility                                                         |
+| `npm run export`             | Exports iOS / Android Hermes JS bundles and the Web bundle; this is not a signed installable build      |
 
-JS/JSX 為目前主要語言；`tsconfig.json` 為日後加入 TypeScript 提供基礎，現有 JS 尚未開啟完整 `checkJs` 語意檢查。
+JS/JSX is the main language for now. `tsconfig.json` is there as a base for adding TypeScript later; full `checkJs` checking is not yet enabled for the existing JS.
 
-## 程式碼位置
+## Where the code lives
 
 ```text
-src/app/                 Expo Router 原生畫面
-  index.jsx              精簡首頁：吉祥物、目的地、時間規劃
-  settings.jsx           設定、Demo 入口、About LeaveNow
-  voice.jsx              語音開關、試聽與自訂錄音入口
-  place.jsx              Home / Uni / Work / 自訂與一次性目的地
-  preparation.jsx        準備活動提示與本次總分鐘數
-  routes.jsx             真實交通班次、步行與替代旅程
-  trip.jsx               開始 / 完成準備、倒數、出門、鬧鐘匯入
-  feedback.jsx           大類 → 多選細節，可略過
-  result.jsx             回饋結果、解鎖與 AI 建議
-  crew.jsx               8 個角色與累積成功日
-  recordings.jsx         4 種自訂提醒錄音（手機）
-  privacy.jsx            平常時間、樣本排除、刪除紀錄
-src/components/          共用視覺、吉祥物、原生時間選擇器
-src/state/               AsyncStorage 狀態、Demo 隔離與音訊
-src/domain/              由原網頁版本保留的純 JS 規則
-src/services/            API、聲音資產、Hermes 相容處理
-assets/                  吉祥物圖集、Ballad 澳洲英文音檔
-server/                  Node 開發交通 API，沿用原 Translink 解析邏輯
-tools/dev.mjs            一鍵啟動工具
+src/app/                 Expo Router native screens
+  index.jsx              Minimal home screen: mascot, destination, time planning
+  settings.jsx           Settings, Demo entry, About LeaveNow
+  voice.jsx              Voice on/off, preview and custom recordings entry
+  place.jsx              Home / Uni / Work / custom and one-off destinations
+  preparation.jsx        Preparation activity prompts and total minutes for this trip
+  routes.jsx             Real transit services, walking and alternative journeys
+  trip.jsx               Start / finish getting ready, countdown, leave, alarm import
+  feedback.jsx           Category → multi-select details, skippable
+  result.jsx             Feedback result, unlocks and AI suggestions
+  crew.jsx               8 characters and cumulative success days
+  recordings.jsx         4 custom reminder recordings (phone)
+  privacy.jsx            Usual times, excluding samples, deleting records
+src/components/          Shared UI, mascot, native date/time picker
+src/state/               AsyncStorage state, Demo isolation and audio
+src/domain/              Pure JS rules kept from the original web version
+src/services/            API, voice assets, Hermes compatibility
+assets/                  Mascot sprites, Ballad Australian English voice clips
+server/                  Node development transport API, reusing the original Translink parsing logic
+tools/dev.mjs            One-command startup tool
 ```
 
-畫面樣式主要在 `src/components/ui.jsx`。首頁比例在 `src/app/index.jsx`。改角色台詞可看 `src/domain/companion.mjs`；改文字不會自動重製已生成的音檔。
+Most styling lives in `src/components/ui.jsx`. Home screen proportions are in `src/app/index.jsx`. Character lines are in `src/domain/companion.mjs`; editing the text does not regenerate the existing voice clips.
 
-## 已移植的互動
+## Features ported from the web version
 
-- Home 固定出發；Uni、Work、自訂常用地點與一次性目的地。
-- iOS 原生日期／時間選擇器。所有計畫以 Brisbane 時區計算。
-- 七個可略過的準備活動提示；只設定本次總準備時間，不改平常設定。
-- 真實 Translink 位置搜尋與路線規劃；準備時間參與班次可行性與開始準備時間計算。
-- 前景倒數、開始準備與出門語音、Start / Ready 實測總時長。
-- 3 筆實測開始個人平均估計、8 筆納入時間情境；接受、修改或保留。
-- 二層回饋、計畫／紀錄時長比較、不因錯過或交通問題自動增加準備時間。
-- 吉祥物表情與說話動作、關閉語音／動畫、尊重系統減少動態設定。
-- 8 個交通角色、1/3/7/21/66 個累積成功日，依 Brisbane 出門日去重。
-- Demo 與真實狀態隔離，完整準備 → 出門 → 回報 → 解鎖；收藏頁可切換示範里程碑。
-- 4 種短錄音、字幕、先聽再存、刪除；本機保存、不做聲音複製。Demo 不保存麥克風錄音。
-- 獨立的設定、資料來源與學生概念標示。
+- Fixed Home starting point; Uni, Work, custom saved places and one-off destinations.
+- Native iOS date and time pickers. All plans are calculated in Brisbane time.
+- Seven optional preparation activity prompts. You set the total preparation time for this trip only, without changing your usual setting.
+- Real Translink location search and journey planning. Preparation time is used to check which services are feasible and when to start getting ready.
+- Foreground countdown, voice prompts to start getting ready and to leave, and measured Start / Ready totals.
+- A personal average estimate starts after 3 measured records, and time-of-day context is included after 8; you can accept, edit or keep your setting.
+- Two-level feedback and planned vs. recorded duration comparison. Missed services or transit problems never automatically add preparation time.
+- Mascot expressions and talking animation; voice and animation can be turned off, and the system Reduce Motion setting is respected.
+- 8 transit characters unlocked at 1 / 3 / 7 / 21 / 66 cumulative success days, counted once per Brisbane departure day.
+- Demo mode is isolated from real data and walks through prepare → leave → report → unlock; the collection screen can switch between demo milestones.
+- 4 short recordings with captions, listen-before-save and delete. Stored on the device only, with no voice cloning. Demo mode never saves microphone recordings.
+- Separate settings, data source notes and student-concept labels.
 
-## 真實交通資料如何連線
+## How real transit data connects
 
-`npm run dev` 同時啟動本機 `server/index.mjs`，自動以 `EXPO_PUBLIC_API_BASE_URL=http://<Mac LAN IP>:4174` 連接。Mac 必須保持開機、同 Wi-Fi，且允許 Node 接受區域網路連線。Demo 不需要交通 API。
+`npm run dev` also starts the local `server/index.mjs` and points the app at it with `EXPO_PUBLIC_API_BASE_URL=http://<Mac LAN IP>:4174`. The Mac must stay on, be on the same Wi-Fi, and allow Node to accept local network connections. Demo mode does not need the transit API.
 
-這個轉接服務只處理 `/api/locations`、`/api/plan`、`/health`；不儲存或列印使用者地址。活動、回饋和錄音不放進交通查詢。依賴 Translink 網站的公開端點，並非具 SLA 的正式第三方 API；格式或可用性變動時會顯示錯誤及官方連結。**班次是真實規劃結果，但沒有宣稱即時預測已確認。**
+This proxy only handles `/api/locations`, `/api/plan` and `/health`. It does not store or log user addresses. Activities, feedback and recordings are never sent with transit requests. It relies on public endpoints of the Translink website, not a third-party API with an SLA; if their format or availability changes, the app shows an error and a link to the official site. **Services are real journey-planner results, but the app does not claim they are confirmed real-time predictions.**
 
-若 Mac 有 VPN 或多網卡導致自動偵測錯誤，可參照 `.env.example`，在終端機明確設定：
+If a VPN or multiple network interfaces make auto-detection pick the wrong address, set it explicitly in the terminal, as shown in `.env.example`:
 
 ```sh
-EXPO_PUBLIC_API_BASE_URL=http://你的Mac區域網路IP:4174 npm run dev
+EXPO_PUBLIC_API_BASE_URL=http://<your-Mac-LAN-IP>:4174 npm run dev
 ```
 
-`EXPO_PUBLIC_*` 是可見的 App 設定，不能放秘密金鑰。不要把原私人 Sites 網址直接填為 API；Expo Go 不會共用 Safari 的登入 cookie。若將來要離開家中 Wi-Fi 獨立使用，需把這個轉接服務另行部署到 HTTPS 主機，或換成有正式授權的交通 API。本機 API 不應直接暴露到公網。
+`EXPO_PUBLIC_*` values are visible app configuration, so never put secret keys in them. Do not use the original private Sites URL as the API; Expo Go does not share Safari's login cookies. To use the app away from your home Wi-Fi, deploy this proxy to an HTTPS host or switch to a properly licensed transit API. Do not expose the local API directly to the internet.
 
-## 鎖屏提醒：與已安裝 iPhone App 的關係
+If port 4174 is already in use, `npm run dev` picks a free port between 4175 and 4184 and passes the correct API URL to Expo. Use the new QR code shown in the terminal for that run.
 
-Expo Go 不包含自訂 AlarmKit 原生模組。這一版只在 App 前景播放角色語音；背景／鎖屏不宣稱準時播放。
+## Lock-screen reminders and the installed iPhone app
 
-旅程頁的 **Set iPhone lock-screen alarms** 保留原本 `leavenow://alarms` 交接協定，可以開啟先前已安裝的 **LeaveNow Alarms**，讓你在原生 App 確認排程。首次安裝 LeaveNow Expo 本身不會安裝那個鬧鐘 App。要把 AlarmKit 整合進同一個 App，下一步需要 Expo development build 與 Swift 原生模組。
+Expo Go does not include the custom AlarmKit native module. This version only plays character voice prompts while the app is in the foreground; it does not claim to play on time in the background or on the lock screen.
 
-開啟外部 App 不等於成功設定鬧鐘。變更、取消或完成旅程後，已匯入的鬧鐘仍需在 LeaveNow Alarms 內更新／取消。自訂錄音與 Ballad 不會自動成為該 App 的鎖屏鬧鐘聲音。
+On the trip screen, **Set iPhone lock-screen alarms** keeps the original `leavenow://alarms` hand-off, which opens the previously installed **LeaveNow Alarms** app so you can confirm the schedule in that native app. Installing LeaveNow Expo does not install the alarm app. Bringing AlarmKit into the same app needs an Expo development build and a Swift native module.
 
-## 本機資料與素材
+Opening the external app does not mean the alarms were set. If you change, cancel or finish a trip, update or cancel the imported alarms in LeaveNow Alarms. Custom recordings and Ballad clips do not become that app's lock-screen alarm sounds.
 
-- 原 Safari 網站、Expo Go、LeaveNow Alarms 三者目前不自動同步資料。
-- 所有實際 Start / Ready 記錄、回饋與角色天數放在 Expo Go 的 AsyncStorage；錄音放在此 App 的文件目錄。
-- Ballad 音檔已隨專案打包，沒有內嵌 API key；播放不呼叫 OpenAI。
-- Bluey／Bingo 與交通業者相關設計仍是學生概念素材。轉成 React Native 不會改變其權利狀態；商業發布前需處理授權或替換原創角色。
+## Local data and assets
 
-## 驗證與待做
+- The original Safari website, Expo Go and LeaveNow Alarms do not sync data with each other.
+- All real Start / Ready records, feedback and character days are stored in Expo Go's AsyncStorage; recordings are stored in this app's document directory.
+- Ballad voice clips are bundled with the project with no API key embedded; playback does not call OpenAI.
+- Bluey / Bingo and transit-operator-related designs are student concept assets. Moving to React Native does not change their rights status; before any commercial release, they need licensing or replacement with original characters.
 
-已完成 lint、專案檢查、核心行為測試、Expo doctor，以及 iOS / Android / Web bundle 匯出。以 React Native Web 做了手機尺寸操作驗證：Demo 的活動提示、40 分鐘本次估計、實測示例、回報、解鎖、退出 Demo 後真實進度不變；交通提前回饋保持平常準備時間不變。也以公開地點完成真實 Translink 搜尋與班次查詢。原生權限、iPhone 麥克風、音訊與 AlarmKit 交接仍需在實機測試；bundle 匯出不等於實機驗證。
+## Verification and to-do
 
-開發依賴目前仍有 npm audit 的上游警示（包含 Metro/Jest/Expo 工具鏈）。已執行不跨版本的修補；未用 `--force` 破壞 Expo Go 相容性。這是本機開發／課程原型，正式發布前應重新評估支援的 SDK、開發伺服器與套件安全更新。
+Done: lint, project check, core behaviour tests, Expo doctor, and iOS / Android / Web bundle export. Phone-size interaction was checked in React Native Web: Demo activity prompts, the 40-minute estimate for this trip, measured examples, reporting, unlocking, and real progress staying unchanged after leaving Demo; feedback about an early service keeps the usual preparation time unchanged. Real Translink search and journey lookups were also completed with public locations. Native permissions, the iPhone microphone, audio and the AlarmKit hand-off still need testing on a real device; a bundle export is not device verification.
 
-來源基準：原 LeaveNow 網站 commit `3932b9b1b1103b0963451243677f98bb43692ccf`（2026-10-14）。網頁與原 Swift 鬧鐘專案仍各自保留；此專案不需要其資料夾即可開發。
+Dev dependencies still show upstream `npm audit` warnings (including the Metro / Jest / Expo toolchain). Non-breaking fixes have been applied; `--force` was not used, to avoid breaking Expo Go compatibility. This is a local development / course prototype; before a public release, re-evaluate the supported SDK, dev server and package security updates.
 
-若 4174 已被使用，`npm run dev` 會選用 4175–4184 的空閒連接埠，並自動把正確 API 網址交給 Expo。請使用這次啟動後終端機顯示的新 QR code。
+Source baseline: original LeaveNow website commit `3932b9b1b1103b0963451243677f98bb43692ccf` (2026-10-14). The website and the original Swift alarm project are kept separately; this project does not need their folders for development.
